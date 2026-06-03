@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KNN Learning Site</title>
+<link href="style.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&amp;family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet"/><meta content="light dark" name="color-scheme"/></head>
+<body>
+<section aria-label="Site introduction" class="intro-hero"><img alt="Illustration of KNN learning" class="intro-img" src="intro.jpg"/><h1 class="intro-title">Master K-Nearest Neighbors (KNN)</h1><p class="intro-sub">Interactive visuals, hands-on widgets, and quick quizzes — learn by doing.</p><button class="start-btn" onclick="startLearning()">Start Learning ▶</button></section><header class="site-header">
+<h1>K-Nearest Neighbors (KNN) — Learn by Doing</h1>
+<button aria-label="Toggle light/dark" class="theme-toggle" id="theme-toggle">🌙 Dark</button>
+</header>
+<nav aria-label="KNN learning tabs" class="tabs" role="tablist">
+<button aria-controls="tab0" aria-selected="true" class="tablink active" data-tab="tab0" role="tab">0. Team Members</button>
+<button aria-controls="tab1" aria-selected="false" class="tablink" data-tab="tab1" role="tab">1. What &amp; Why</button>
+<button aria-controls="tab1b" aria-selected="false" class="tablink" data-tab="tab1b" role="tab">2. KNN: Classification vs Regression</button>
+<button aria-controls="tab2" aria-selected="false" class="tablink" data-tab="tab2" role="tab">3. Step-by-Step &amp; Theory</button>
+<button aria-controls="tab3" aria-selected="false" class="tablink" data-tab="tab3" role="tab">4. Interactive Playground</button>
+<button aria-controls="tab4" aria-selected="false" class="tablink" data-tab="tab4" role="tab">5. Test Yourself</button></nav>
+<main>
+<!-- Tab 0 -->
+<section aria-labelledby="tab0" class="tabcontent shown" id="tab0" role="tabpanel">
+
+<div class="team-fancy"><section class="card team-card"><h3 class="card-title">Team Members</h3><ul class="team-grid"><li class="team-item"><span class="name">Jeraz Khushru Anklesaria</span><span class="badge">2332257</span></li><li class="team-item"><span class="name">Anastasiia Mosina</span><span class="badge">2235788</span></li><li class="team-item"><span class="name">Vishal Gala</span><span class="badge">2320381</span></li><li class="team-item"><span class="name">Manbir Kaur</span><span class="badge">2413306</span></li></ul></section><section class="card project-card"><h3 class="card-title">Project &amp; Course</h3><dl class="meta-list"><dt>Course</dt><dd>BUSI 652: Predictive Analytics: What Works? (HBD-SUMMER25-02)</dd><dt>Instructor</dt><dd>Amin Ghazanfari</dd><dt>Group</dt><dd>Group 3 — Final Project</dd><dt>Project</dt><dd>K-Nearest Neighbors (KNN) — Learn by Doing</dd><dt>Date</dt><dd>September 18, 2025</dd></dl></section></div></section>
+<!-- Tab 1 -->
+<section aria-labelledby="tab1" class="tabcontent" id="tab1" role="tabpanel">
+<h2>Where does KNN belong?</h2>
+<p class="lead">Which branch do you think KNN belongs to? Click on the path you believe is correct.</p>
+<!-- CENTERED WRAPPER -->
+<div class="diagram-wrap">
+<div aria-label="ML branches" class="node-map" role="group">
+<svg id="wires" preserveaspectratio="none" viewbox="0 0 900 545"></svg>
+<div class="center-label" id="node-ml">Machine<br/>Learning</div>
+<button class="node big correct" id="node-supervised" style="left: 63%; top: 36%;">Supervised<br/>Learning</button>
+<div style="position:absolute; left:82%; top:18%; text-align:center;">
+<button class="node small correct" id="node-classification">Classification</button>
+<p class="hint" hidden="" id="hint" style="margin-top:6px; margin-left:-220px; font-size:13px; max-width:140px;">
+            Hint: KNN is most often taught as a <strong>supervised learning</strong> algorithm for <strong>classification</strong> (it can do regression too).
+          </p>
+</div>
+<button class="node small wrong" id="node-dimred" style="left: 14%; top: 22%;">Dimension<br/>Reduction</button>
+<button class="node big wrong" id="node-unsupervised" style="left: 24%; top: 56%;">Unsupervised<br/>Learning</button>
+<button class="node small wrong" id="node-clustering" style="left: 10%; top: 78%;">Clustering</button>
+<button class="node big wrong" id="node-reinforcement" style="left: 52%; top: 74%;">Reinforcement<br/>Learning</button>
+<button class="node small wrong" id="node-regression" style="left: 82%; top: 62%;">Regression</button>
+</div>
+</div>
+<h2><strong>Compare: K-NN &amp; NN & K Means Clustering</strong></h2>
+<p class="lead">Guess: do you think KNN (K Nearest Neighbor), NN (Nearest Neighbor) and K Means Clustering basically the same thing? Click on the one you believe is correct.</p>
+<div aria-label="KNN vs NN" class="quiz-box" role="group">
+<div class="quiz-buttons">
+<div class="quiz-col">
+<button class="quiz-btn no" id="btn-no">no, KNN and NN different from each other</button>
+<div class="info-block" hidden="" id="info-no">
+<h4>About KNN (K-Nearest Neighbors) 🧭</h4>
+<p>KNN classifies or predicts by looking at the K closest examples and taking a vote (classification) or an average (regression).</p>
+</div>
+</div>
+<div class="quiz-col">
+<button class="quiz-btn yes" id="btn-yes">yes, KNN and NN is the same</button>
+<div class="info-block" hidden="" id="info-yes">
+<h4>About NN (Nearest Neighbor) 📍</h4>
+<p><strong>Nearest Neighbor (NN)</strong> uses only the single closest training point to decide the label.</p>
+</div>
+</div>
+<div class="quiz-col">
+<button class="quiz-btn yes" id="btn-kmeans">yes, KNN and K Means Clustering is the same</button>
+<div class="info-block" hidden="" id="info-kmeans">
+<h4>K-Means Clustering ≠ K-NN</h4>
+<ul>
+<li><strong>Unsupervised vs Supervised:</strong> K-Means is <em>unsupervised</em> (no labels). K-NN is <em>supervised</em> and needs labeled examples.</li>
+<li><strong>What “k” means:</strong> In K-Means, <em>k</em> = number of clusters; in K-NN, <em>k</em> = number of neighbors used to vote.</li>
+</ul>
+<p><em>Bottom line:</em> Similar names, very different goals and workflows.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="next-row">
+<button aria-label="Go to next tab" class="btn primary next-tab" data-next="tab1b">Next ▶</button>
+</div>
+</section>
+<!-- NEW Tab 1B: Classification vs Regression -->
+<section aria-labelledby="tab1b" class="tabcontent" id="tab1b" role="tabpanel">
+<h2>KNN: What’s the difference between <em>Classification</em> and <em>Regression</em>?</h2>
+<div class="explain">
+<ul class="bullets">
+<li><strong>Classification:</strong> neighbors have <em>category labels</em> (A, B, …). The prediction is a <em>majority vote</em>.</li>
+<li><strong>Regression:</strong> neighbors have <em>numbers</em> (e.g., house price). The prediction is the <em>average</em> (mean) of their values.</li>
+<li>Everything else—distance metric, k, scaling—works the same way.</li>
+</ul>
+</div>
+<div class="explain mini-widget">
+<div class="mini-head">
+<h3>Interactive: Classifier vs Regressor (same neighbors, different rule)</h3>
+<p class="muted">Drag the green probe. Switch mode and k. In <strong>Classification</strong> you’ll see a vote (A vs B). In <strong>Regression</strong> you’ll see the numeric average.</p>
+</div>
+<div class="mini-flex">
+<div class="mini-controls">
+<label for="cr-mode">Mode</label>
+<select id="cr-mode">
+<option selected="" value="clf">Classification</option>
+<option value="reg">Regression</option>
+</select>
+<label for="cr-k">k</label>
+<input id="cr-k" max="7" min="1" step="2" type="range" value="5"/>
+<output id="cr-k-out">5</output>
+</div>
+<canvas aria-label="Classification vs Regression demo" height="280" id="cr-canvas" width="480"></canvas>
+<div class="mini-readouts">
+<div id="cr-out1"><span class="pill pill-a">A</span> <strong>0</strong> vs <span class="pill pill-b">B</span> <strong>0</strong></div>
+<div class="muted" id="cr-out2">Prediction: —</div>
+<div class="note">Same neighbors, different aggregation rule: vote vs average.</div>
+</div>
+</div>
+</div>
+<div class="next-row">
+<button aria-label="Go to next tab" class="btn primary next-tab" data-next="tab2">Next ▶</button>
+</div>
+</section>
+<!-- Tab 2 -->
+<section aria-labelledby="tab2" class="tabcontent" id="tab2" role="tabpanel">
+<div class="quiz-box">
+<h2>Step-by-Step</h2>
+<!-- PLAIN-ENGLISH STARTER -->
+<div class="explain">
+<h3>Plain English: What problem does KNN solve?</h3>
+<p>KNN learns by <em>remembering examples</em>. When a new item arrives, it finds the <strong>k most similar</strong> examples and lets them <strong>vote</strong> on the answer (classification) or takes their <strong>average</strong> (regression).</p>
+<ul>
+<li><strong>“Similarity”</strong> means <em>short distance</em> under a metric (L2, L1, L∞).</li>
+<li><strong>“k”</strong> is how many neighbors you consult. Odd k helps avoid ties.</li>
+<li><strong>Scaling</strong> matters: variables on larger numeric scales can dominate distance.</li>
+</ul>
+</div>
+<p class="lede">KNN is a non-parametric, supervised method that stores labeled samples and, for a new point, finds the k closest samples by a distance metric, then predicts by majority vote (classification) or averaging (regression).</p>
+<h3>Core steps</h3>
+<ol class="numbered">
+<li><strong>Choose k</strong> and a <strong>distance metric</strong> (L2/L1/L∞).</li>
+<li>Find the <strong>k nearest</strong> training points to the query.</li>
+<li><strong>Vote</strong> (or average for regression).</li>
+</ol>
+<h3>When to use KNN (beginner guide)</h3>
+<ul class="bullets">
+<li>You have <strong>labeled examples</strong> but no easy formula.</li>
+<li>Data is <strong>low to moderate dimensional</strong> and relatively <strong>clean</strong>.</li>
+<li>You can afford <strong>query-time cost</strong> (KNN is fast to “train” but does work at prediction time).</li>
+</ul>
+<h3>Common pitfalls</h3>
+<ul class="bullets">
+<li><strong>No scaling:</strong> big-number features dominate distance.</li>
+<li><strong>Too small k:</strong> overfits noise (high variance).</li>
+<li><strong>Too large k:</strong> oversmooths boundaries (high bias).</li>
+<li><strong>High dimension:</strong> distances look similar (curse of dimensionality).</li>
+</ul>
+<h3>Bias–variance intuition</h3>
+<p>Small k → flexible boundaries (low bias, high variance). Large k → smoother boundaries (higher bias, lower variance).</p>
+<h3>Distance metrics &amp; scaling</h3>
+<p>Distance choice changes neighbor ranking (Euclidean L2, Manhattan L1, Chebyshev L∞). <strong>Normalize/standardize features</strong> so large-scale variables don’t dominate.</p>
+<!-- INTERACTIVE #1: DISTANCE EXPLORER -->
+<div class="explain mini-widget">
+<div class="mini-head">
+<h3>Interactive: Distance Explorer</h3>
+<p class="muted">Drag the green point. The circle/diamond/square are the L2/L1/L∞ “unit balls” scaled so the point lies on each shape. Numbers update live.</p>
+</div>
+<div class="mini-flex">
+<canvas aria-label="Distance Explorer" height="240" id="dist-explorer" width="360"></canvas>
+<div class="mini-readouts">
+<div><span class="pill pill-l2">L2</span> Euclidean: <strong id="de-l2">0.00</strong></div>
+<div><span class="pill pill-l1">L1</span> Manhattan: <strong id="de-l1">0.00</strong></div>
+<div><span class="pill pill-linf">L∞</span> Chebyshev: <strong id="de-linf">0.00</strong></div>
+<div class="note">Pick a metric first; then compare points within it. Don’t compare L1 vs L2 numbers directly.</div>
+</div>
+</div>
+</div>
+<!-- INTERACTIVE #2: FEATURE SCALING DEMO -->
+<div class="explain mini-widget">
+<div class="mini-head">
+<h3>Interactive: Why Scaling Changes KNN</h3>
+<p class="muted">Without scaling, the axis with bigger numbers can dominate distance. Toggle <em>Standardize</em> and watch the prediction change. Drag the green test point. Adjust k.</p>
+</div>
+<div class="mini-flex">
+<div class="mini-controls">
+<label class="knn-switch">
+<input id="scal-toggle" type="checkbox"/>
+<span>Standardize features (z-score)</span>
+</label>
+<label for="scal-k">k</label>
+<input id="scal-k" max="7" min="1" step="2" type="range" value="5"/>
+<output id="scal-k-out">5</output>
+</div>
+<canvas aria-label="Scaling Demo" height="260" id="scal-demo" width="420"></canvas>
+<div class="mini-readouts">
+<div>Prediction: <strong id="scal-pred">—</strong></div>
+<div>Votes → <span class="pill pill-a">A</span> <strong id="scal-a">0</strong> vs <span class="pill pill-b">B</span> <strong id="scal-b">0</strong></div>
+<div class="note">We fit scaling on <em>training points</em> then apply it to the test point—like a proper pipeline.</div>
+</div>
+</div>
+</div>
+<h2 class="theory-title">More Theory: Under the Hood</h2>
+<h3>Minkowski distance family</h3>
+<p>Many metrics are special cases of Minkowski distance:
+        <code>d_p(x,y)=\Big(\sum_i |x_i-y_i|^p\Big)^{1/p}</code>.
+        Set p=2 → Euclidean (L2), p=1 → Manhattan (L1), and p→∞ → Chebyshev (max norm).
+      </p>
+<h3>Complexity &amp; data structures</h3>
+<ul class="bullets">
+<li><strong>Training:</strong> ~O(1) (store the data).</li>
+<li><strong>Query (naïve):</strong> O(n·d) to compute distances in d dimensions across n points.</li>
+<li><strong>Faster search:</strong> k-d trees/ball trees help in low dimensions; approximate NN (e.g., HNSW) trades a bit of accuracy for speed.</li>
+</ul>
+<h3>Choosing k</h3>
+<ul class="bullets">
+<li><strong>Cross-validate:</strong> try odd k (1,3,5,7,…). Pick the smallest k on the accuracy plateau.</li>
+<li><strong>Imbalanced classes:</strong> consider class weights or resampling.</li>
+</ul>
+<h3>Curse of dimensionality</h3>
+<p>As dimension grows, nearest and farthest points become similarly distant (distance concentration). Use dimensionality reduction or feature selection to restore neighborhood signal.</p>
+<h3>KNN for regression</h3>
+<p>Average targets of the k nearest neighbors. Evaluate with MAE/MSE; scaling and k tuning matter as in classification.</p>
+</div>
+<div class="next-row">
+<button aria-label="Go to next tab" class="btn primary next-tab" data-next="tab3">Next ▶</button>
+</div>
+</section>
+<!-- Tab 3 -->
+<section aria-labelledby="tab3" class="tabcontent" id="tab3" role="tabpanel">
+<h2>Interactive Playground — Click to Add Points &amp; Try KNN</h2>
+<div class="howto">
+<strong>How to use:</strong>
+<ol>
+<li>Select <em>Class A</em> or <em>Class B</em> below.</li>
+<li><strong>Left-click</strong> the canvas to add a training point.</li>
+<li><strong>Right-click</strong> the canvas to add a <strong>Class B</strong> point (Add mode).</li>
+<li>Switch to <em>Probe / predict</em> to place a green test point and see the predicted class.</li>
+<li>Use the <em>k</em> slider and metric dropdown to change the decision.</li>
+<li>Decision map auto-recomputes when toggled on.</li>
+</ol>
+</div>
+<div class="explain" id="playground-theory">
+<h3>Distance metrics &amp; scaling</h3>
+<p>Distance choice changes neighbor ranking (Euclidean L2, Manhattan L1, Chebyshev L∞). Normalize/standardize features so large-scale variables don’t dominate.</p>
+<!-- NEW: inline metric badges -->
+<div aria-label="metric legend" class="metric-badges">
+<span class="metric-badge" data-metric="l2" title="Euclidean (L2)">
+<svg aria-hidden="true" viewbox="0 0 20 20"><circle cx="10" cy="10" r="7"></circle></svg>
+<span>L2 (circle)</span>
+</span>
+<span class="metric-badge" data-metric="l1" title="Manhattan (L1)">
+<svg aria-hidden="true" viewbox="0 0 20 20"><polygon points="10,3 17,10 10,17 3,10"></polygon></svg>
+<span>L1 (diamond)</span>
+</span>
+<span class="metric-badge" data-metric="linf" title="Chebyshev (L∞)">
+<svg aria-hidden="true" viewbox="0 0 20 20"><rect height="12" rx="2" width="12" x="4" y="4"></rect></svg>
+<span>L∞ (square)</span>
+</span>
+</div>
+<h3>Vote among the k nearest points</h3>
+<p>Vote among the k nearest points.</p>
+<!-- NEW: a mirrored, live bead strip for current top-k neighbors -->
+<div class="vote-mini-wrap">
+<div aria-label="nearest-neighbor vote beads" class="vote-beads" id="vote-mini"></div>
+<div class="mini-note">Live: same order as the current top-k neighbors (blue=A, red=B).</div>
+</div>
+</div>
+<div class="knn-sim">
+<div aria-label="KNN playground controls" class="knn-controls" role="toolbar">
+<div class="group">
+<span>Add as:</span>
+<button aria-pressed="true" class="knn-chip active" data-label="A" id="knn-label-a">Class A</button>
+<button aria-pressed="false" class="knn-chip" data-label="B" id="knn-label-b">Class B</button>
+</div>
+<div class="group">
+<span>Mode:</span>
+<button aria-pressed="true" class="knn-chip active" data-mode="add" id="knn-mode-add">Add training</button>
+<button aria-pressed="false" class="knn-chip" data-mode="probe" id="knn-mode-probe">Probe / predict</button>
+</div>
+<div class="group">
+<label for="knn-k">k</label>
+<input id="knn-k" max="15" min="1" step="2" type="range" value="5"/>
+<output id="knn-k-out">5</output>
+</div>
+<div class="group">
+<label for="knn-metric">Metric</label>
+<select aria-describedby="metric-icon" id="knn-metric">
+<option value="l2">Euclidean (L2)</option>
+<option value="l1">Manhattan (L1)</option>
+<option value="linf">Chebyshev (L∞)</option>
+</select>
+<svg aria-label="Metric unit ball" class="unit-ball" height="28" id="metric-icon" role="img" viewbox="0 0 28 28" width="28"></svg>
+</div>
+<div class="group">
+<span><strong>Decision Map</strong></span>
+<label class="knn-switch">
+<input id="knn-show-map" type="checkbox"/>
+<span>Show decision map</span>
+</label>
+<button class="btn outline" id="knn-render-map">Render now</button>
+</div>
+<div class="group">
+<span><strong>Variance demo</strong></span>
+<label for="knn-noise">Noise</label>
+<input id="knn-noise" max="40" min="0" step="1" type="range" value="12"/>
+<output id="knn-noise-out">12</output>
+<button class="btn outline" id="knn-resample">Resample</button>
+</div>
+<div class="group">
+<label for="knn-randN">Random points</label>
+<input id="knn-randN" max="200" min="1" step="1" type="range" value="50"/>
+<output id="knn-randN-out">50</output>
+<button class="btn outline" id="knn-add-rand">Add</button>
+<button class="btn outline" id="knn-clear">Clear</button>
+</div>
+<div class="group">
+<button class="btn outline" id="knn-undo">Undo</button>
+</div>
+<div aria-live="polite" class="group status-pill" id="knn-status">
+          Mode: Add training • Label: A
+        </div>
+</div>
+<div class="knn-stage-wrap">
+<canvas aria-label="Interactive KNN canvas" height="480" id="knn-canvas" width="720"></canvas>
+<div class="knn-legend">
+<span class="dot a"></span> A
+          <span class="dot b"></span> B
+          <span class="dot probe"></span> Test
+          <span class="seg neighbor"></span> Neighbor
+        </div>
+<div aria-live="polite" class="knn-readout" id="knn-readout">Add training points by left-clicking (right-click = Class B).</div>
+</div>
+<div class="kv-grid">
+<div class="panel votes">
+<h4>Votes</h4>
+<div aria-label="vote bar" class="vote-bar"><div class="barA"></div><div class="barB"></div></div>
+<div class="vote-counts"><span id="voteA">A: 0</span><span id="voteB">B: 0</span></div>
+</div>
+<div class="panel neighbors">
+<h4>Neighbors</h4>
+<ol class="neighbor-list" id="knn-neighbors">
+<li class="muted">Add a test point in Predict mode and click on the canvas.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="next-row">
+<button aria-label="Go to next tab" class="btn primary next-tab" data-next="tab4">Next ▶</button>
+</div>
+</section>
+<!-- Tab 4 -->
+<section aria-labelledby="tab4" class="tabcontent" id="tab4" role="tabpanel">
+<h2>Test Yourself</h2>
+<p>Select your answers for all five questions, then click <strong>Submit</strong>.</p>
+<div id="quiz">
+<div class="question" data-q="1">
+<h3>Q1. KNN with k=1 tends to have…</h3>
+<ul class="options">
+<li class="option" data-correct="true">Low bias, high variance (very sensitive to noise)</li>
+<li class="option">High bias, low variance</li>
+<li class="option">Low bias, low variance</li>
+<li class="option">High bias, high variance</li>
+</ul>
+</div>
+<div class="question" data-q="2">
+<h3>Q2. Which statement is most accurate about distance metrics?</h3>
+<ul class="options">
+<li class="option">Switching L2→L1 never changes neighbors</li>
+<li class="option" data-correct="true">Unscaled features can distort KNN decisions</li>
+<li class="option">Chebyshev is always smaller than Euclidean</li>
+<li class="option">Metric choice doesn’t matter</li>
+</ul>
+</div>
+<div class="question" data-q="3">
+<h3>Q3. Majority vote in KNN gives more influence to…</h3>
+<ul class="options">
+<li class="option">Farther neighbors</li>
+<li class="option" data-correct="true">All k neighbors equally (1 vote each)</li>
+<li class="option">Minority class</li>
+<li class="option">Only the nearest neighbor</li>
+</ul>
+</div>
+<div class="question" data-q="4">
+<h3>Q4. To reduce overfitting in KNN, you would commonly…</h3>
+<ul class="options">
+<li class="option" data-correct="true">Increase k</li>
+<li class="option">Decrease k</li>
+<li class="option">Ignore scaling</li>
+<li class="option">Add random labels</li>
+</ul>
+</div>
+<div class="question" data-q="5">
+<h3>Q5. KNN in scikit-learn commonly uses…</h3>
+<ul class="options">
+<li class="option">Only Manhattan distance</li>
+<li class="option">Only radius neighbors</li>
+<li class="option" data-correct="true">Any metric (default L2) and k neighbors</li>
+<li class="option">Only cosine distance</li>
+</ul>
+</div>
+</div>
+<div class="quiz-actions">
+<button class="btn outline" id="reveal-answers" style="display:none;">Show Correct Answers</button>
+<button class="btn primary" id="submit-quiz">Submit</button>
+<button class="btn outline" id="retry-quiz" style="display:none;">Try Again</button>
+</div>
+<p aria-live="polite" class="quiz-summary" id="quiz-summary"></p>
+<div class="next-row">
+<button aria-label="Go back to first tab" class="btn primary next-tab" data-next="tab1">Finish ▶</button>
+</div>
+</section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
